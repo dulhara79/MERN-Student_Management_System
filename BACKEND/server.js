@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+// import logger from "./log";
+const logger = require("./log");
 
 const PORT = process.env.PORT || 8070;
 
@@ -23,7 +25,8 @@ mongoose.connect(URL, {
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-  console.log("MongoDB connection success");
+  // console.log("MongoDB connection success");
+  logger.info("MongoDB connection success");
 });
 
 const studentRouter = require("./routes/students.js");
@@ -31,5 +34,6 @@ const studentRouter = require("./routes/students.js");
 app.use("/student", studentRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port number: ${PORT}`);
+  // console.log(`Server is running on port number: ${PORT}`);
+  logger.info(`Server is running on port number: ${PORT}`);
 });
