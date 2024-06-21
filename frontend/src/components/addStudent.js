@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddStudent() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+
+  const Navigate = useNavigate();
 
   function sendData(e) {
     e.preventDefault();
@@ -21,9 +24,7 @@ export default function AddStudent() {
       .post("http://localhost:8070/student/add", newStudent)
       .then((res) => {
         alert("Student added");
-        // setName("");
-        // setAge("");
-        // setGender("");
+        Navigate("/");
       })
       .catch((err) => {
         alert(err);
@@ -32,6 +33,7 @@ export default function AddStudent() {
 
   return (
     <div>
+      <center><h1>Add Student</h1></center>
       <form className="container" onSubmit={sendData}>
         <div className="mb-3">
           <label for="name" className="form-label">
